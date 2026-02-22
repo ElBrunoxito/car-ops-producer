@@ -4,6 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE = "yobrunox/ms-car-ops-producer"
         DOCKER_TAG   = "${BUILD_NUMBER}"
+        DOCKER_CREDS = credentials('dockerhub-creds')
+
     }
 
     stages {
@@ -16,6 +18,14 @@ pipeline {
         stage('Build Maven') {
             steps {
                 sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
+                    docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
+                '''
             }
         }
     }
