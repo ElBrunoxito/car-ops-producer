@@ -1,0 +1,25 @@
+spring:
+  webflux:
+    base-path: /api
+  application:
+    name: car-ops-producer
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      connect-timeout: 2s
+
+  kafka:
+    topic:
+      name: bank.card.replacements.v1
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer # Usa String aqu�
+
+  docker:
+    compose:
+      enabled: false
+
+server:
+  port: 8080
