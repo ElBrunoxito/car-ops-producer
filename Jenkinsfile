@@ -23,6 +23,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh '''
+                    docker build -t yobrunox/${DOCKER_IMAGE}:${DOCKER_TAG} .
                     docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
                     docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
                 '''
