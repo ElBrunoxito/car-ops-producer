@@ -21,4 +21,4 @@ spec:
           - containerPort: 8080
         envFrom:
           - configMapRef:
-            name: ms-car-ops-config
+              name: ms-car-ops-config
