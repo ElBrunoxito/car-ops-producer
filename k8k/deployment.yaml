@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-car-ops-producer
+  labels:
+    app: ms-car-ops-producer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-car-ops-producer
+  template:
+    metadata:
+      labels:
+        app: ms-car-ops-producer
+    spec:
+      containers:
+      - name: ms-car-ops-producer
+        image: yobrunox/ms-car-ops-producer:latest
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - configMapRef:
+            name: ms-car-ops-config

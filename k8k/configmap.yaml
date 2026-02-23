@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-car-ops-config
+data:
+  REDIS_HOST: redis-master
+  REDIS_PORT: "6379"
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  ZOOKEEPER_HOST: zookeeper
+  ZOOKEEPER_PORT: "2181"

@@ -29,5 +29,19 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy to AKS (FIRST TIME)') {
+            steps {
+                sh """
+                kubectl apply -f k8k/kafka-deployment.yaml
+                kubectl apply -f k8k/kafka-service.yaml
+
+                kubectl apply -f k8k/configmap.yaml
+                kubectl apply -f k8k/deployment.yaml
+                kubectl apply -f k8k/service.yaml
+                kubectl apply -f k8k/ingress.yaml
+                """
+            }
+        }
+        
     }
 }
